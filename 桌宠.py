@@ -1998,6 +1998,21 @@ def main():
 
 
 if __name__ == "__main__":
+    # 打包后的自检开关：带 --selftest 启动时只验证模块是否齐全，不开界面。
+    # 用途：确认 weather_api / usage_api / sprites 真的打进 exe 了。
+    if "--selftest" in sys.argv:
+        try:
+            from selftest import run_selftest
+            sys.exit(run_selftest())
+        except Exception as e:
+            log = os.path.join(os.path.expanduser("~"), "feiyu_selftest.txt")
+            try:
+                with open(log, "w", encoding="utf-8") as f:
+                    f.write(f"selftest 自身失败: {type(e).__name__}: {e}\n")
+            except Exception:
+                pass
+            sys.exit(2)
+
     try:
         main()
     except Exception as ex:

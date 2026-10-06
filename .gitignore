@@ -18,3 +18,11 @@ dist/
 # Python 缓存
 __pycache__/
 *.pyc
+
+# 维护用的辅助脚本（上传/发布工具），不进仓库
+_mkmanifest.js
+_push.ps1
+gh_release.ps1
+gh_release_notes.ps1
+gh_fetch.ps1
+api_upload.ps1
